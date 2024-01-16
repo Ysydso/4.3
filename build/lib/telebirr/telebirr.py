@@ -14,7 +14,7 @@ from cryptography.hazmat.primitives.serialization import load_der_public_key
 
 
 class Telebirr:
-    api = "http://196.188.120.3:10443/service-openup/toTradeWebPay"
+    api = "https://example.com/service-openup/toTradeWebPay"
 
     def __init__(
         self,
@@ -30,7 +30,7 @@ class Telebirr:
         total_amount,
         nonce,
         out_trade_no,
-        api="http://196.188.120.3:10443/service-openup/toTradeWebPay",
+        api="https://example.com/service-openup/toTradeWebPay",
     ):
         self.api = api
         self.app_id = app_id
