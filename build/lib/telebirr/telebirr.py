@@ -66,15 +66,12 @@ class Telebirr:
 
     @staticmethod
     def encrypt(public_key, msg):
-        rsa = RSA.importKey(public_key)
-        cipher = PKCS1_v1_5.new(rsa)
-        ciphertext = b""
-        for i in range(0, len(msg) // 117):
-            ciphertext += cipher.encrypt(msg[i * 117 : (i + 1) * 117].encode("utf8"))
-        ciphertext += cipher.encrypt(
-            msg[(len(msg) // 117) * 117 : len(msg)].encode("utf8")
+        rsa = load_der_public_key(public_key.encode(), default_backend())
+        cipher = rsa.encrypt(
+            msg.encode("utf-8"),
+            padding=PKCS1v15()
         )
-        return base64.b64encode(ciphertext).decode("ascii")
+        return base64.b64encode(cipher).decode("ascii")
 
     @staticmethod
     def __sign(ussd, app_key):
